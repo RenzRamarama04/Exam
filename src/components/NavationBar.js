@@ -20,20 +20,16 @@ render(){
         <MDBNavbarToggler onClick={this.toggleCollapse} />
         <MDBCollapse id="navbarCollapse3" isOpen={this.state.isOpen} navbar>
           <MDBNavbarNav left>
-            <MDBNavItem active>
+            <MDBNavItem>
               <MDBNavLink to="/">Home</MDBNavLink>
             </MDBNavItem>
             <MDBNavItem>
-              <MDBNavLink to="/Profile">Profile</MDBNavLink>
+              <MDBNavLink to="/Social">Social</MDBNavLink>
             </MDBNavItem>
           </MDBNavbarNav>
           <MDBNavbarNav right>
-            <MDBNavItem>
-              <MDBFormInline waves>
-                <div className="md-form my-0">
-                  <input className="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" />
-                </div>
-              </MDBFormInline>
+          <MDBNavItem>
+              <MDBNavLink to="/Profile">Profile</MDBNavLink>
             </MDBNavItem>
             {isLoggedin && loggedInbtnClick ? (
             <MDBNavItem>

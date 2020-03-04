@@ -11,6 +11,7 @@ import Home from '../Home/Home';
 import Signup from '../Signup/Signup';
 import Profile from '../Profile/Profile';
 import Application from '../Application/Application';
+import Social from '../Social/Social';
 
 // import styles from './App.style';
 
@@ -28,6 +29,7 @@ class App extends Component {
               <Route exact path="/Signup" component={Signup} />
               <Route exact path="/Profile" component={Profile} />
               <Route exact path="/Application" component={Application} />
+              <Route exact path="/Social" component={Social} />
             </Switch>
           ): (
             <Switch>
