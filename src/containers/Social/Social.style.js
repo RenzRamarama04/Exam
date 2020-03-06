@@ -8,6 +8,7 @@ const styles = {
     backgroundImage: `url(${bgImage})`,
     backgroundRepeat: 'no-repeat',
     backgroundSize: 'cover',
+    marginHorizontal: 10,
   },
   titleTxt: { color: 'white', marginLeft: 10 },
   };
