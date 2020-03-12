@@ -1,6 +1,8 @@
 import React,{ Component} from "react";
+import { connect } from "react-redux";
 import {  MDBRow,  MDBCard, MDBCardBody, MDBIcon, MDBCol, MDBCardImage, MDBView, MDBMask, MDBCardTitle, MDBCardText} from "mdbreact";
 import {get} from 'lodash';
+import { getSocialImg } from '../store/actions/social';
 
 class TeamComponent extends Component {
   constructor(props) {
@@ -10,13 +12,10 @@ class TeamComponent extends Component {
       item: [],
     };
   }
-  componentDidMount() {
-    fetch('https://jsonplaceholder.typicode.com/photos?_limit=10')
-      .then(response => response.json())
-      .then(data => {
-        console.log(data)
-        this.setState({ data })
-      });
+  componentDidMount=()=> {
+      const {onFetchSocialImg} = this.props;
+      onFetchSocialImg()
+
       fetch('https://jsonplaceholder.typicode.com/users?_limit=10')
       .then(response => response.json())
       .then(item => {
@@ -24,26 +23,29 @@ class TeamComponent extends Component {
       });
   }
   render() {
-console.log(this.state.item)
+console.log(this.props.photos,'Hello')
+    const {photos} = this.props;
+    console.log(this.state.item, photos, 'helloooo')
+
     return (
       <MDBRow> 
-          { this.state.data.map((d, i)=>
+          { this.state.item.map((d, i)=>
         <MDBCol style={{marginBottom: 10}} md="3">
             <MDBCard personal className="mb-md-0 mb-4">
             <MDBView hover>
               <MDBCardImage
                 top
-                src={d.thumbnailUrl}
+                src={photos[i].thumbnailUrl}
                 alt="MDBCard image cap"
               />
                 <MDBMask overlay="white-slight" />
             </MDBView>
             <MDBCardBody>
             <MDBCardTitle>
-              {get(this.state.item, `[${i}].name`)}
+              {d.name}
               </MDBCardTitle>
               <MDBCardText>
-                {d.title}
+                {photos[i].title}
               </MDBCardText>
               <hr />
                 <span>
@@ -51,7 +53,7 @@ console.log(this.state.item)
                   50 Connection
                 </span>
                 <MDBCardText>
-                  {get(this.state.item, `[${i}].email`)}
+                  {d.email}
                 </MDBCardText>
             </MDBCardBody>
           </MDBCard>
@@ -63,4 +65,15 @@ console.log(this.state.item)
   }
 }
 
-export default TeamComponent;
+const mapStateToProps = state => ({
+photos: state.social.photos,
+});
+
+const mapDispatchToProps = dispatch => ({
+  onFetchSocialImg: data => { dispatch(getSocialImg(data)) },
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(TeamComponent);
